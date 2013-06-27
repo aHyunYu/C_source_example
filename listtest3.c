@@ -25,8 +25,7 @@ int size(linkedList_h* List);
 int isEmpty(linkedList_h* List);
 void replace(linkedList_h* List, int index, char *string);
 
-int main() 
-{ 
+int main(){ 
 	char insertString[100];
 	int caseNum, index, delnum;
 
@@ -38,104 +37,100 @@ int main()
 		printf("1. addNode \n2. insertMNode \n3. removeNode \n4. allClear \n5. get \n6. contains \n7. indexOf \n8. size \n9. replace \n0. exit\n");
 		printf("\nChoose the number which you want : ");
 		scanf("%d", &caseNum);
-	switch(caseNum){
-	case 1:
-		printf("Insert string in the list : ");
- 		scanf("%s", insertString);
-    		add(List, insertString);
-		printList(List);
-		break;
-	case 2:
-		printf("What is number of index that you insert string? ");
- 		scanf("%d",&index);
-     		printf("\n");
-     		printf("String of inserted index : ");
-     		scanf("%s",insertString);
-     		insertMNode(List, index, insertString);
-		printList(List);
-		break;
-	case 3:
-		printf("\n What number of index that you will delete : ");
-		scanf("%d", &delnum);
-    		removeNode(List, delnum);
-    		printList(List);
-		break;
-	case 4:
-		printf("Delete All\n");
-		clear(List);
-		printList(List);
-		break;
-	case 5:
-		printf("What is index that you want to see : ");
-    		scanf("%d", &index);
-    		get(List, index);
-		printf("\n");
-    		printList(List);
-		break;
-	case 6:
-		printf("If you are curious about what you want, Write string : ");
-		scanf("%s", insertString);
-		contains(List, insertString);
-		break;
-	case 7:
-		printf("What is word what you want to know?? \n");
-		scanf("%s", insertString);
-		indexOf(List, insertString);
-		break;
-	case 8:
-		printf("\n");
-		printf("Size of List : ");
-		size(List);
-		break;
-	case 9:
-		printf("what is the word to be entered? : \n");
-		scanf("%s", insertString);
-		printf("What is number of index what be replaced? \n");
-		scanf("%d", &index);
-		replace(List, index, insertString);
-		printList(List);
-		break;
-	case 0:
-		printf("EXIT\n");
-		break;
-	default:
-		printf("Wrong number. Please write again : ");
-		break;	
-	}
+		switch(caseNum){
+			case 1:
+				printf("Insert string in the list : ");
+	 			scanf("%s", insertString);
+    				add(List, insertString);
+				printList(List);
+				break;
+			case 2:
+				printf("What is number of index that you insert string? ");
+ 				scanf("%d",&index);
+     				printf("\n");
+     				printf("String of inserted index : ");
+     				scanf("%s",insertString);
+     				insertMNode(List, index, insertString);
+				printList(List);
+				break;
+			case 3:
+				printf("\n What number of index that you will delete : ");
+				scanf("%d", &delnum);
+    				removeNode(List, delnum);
+    				printList(List);
+				break;
+			case 4:
+				printf("Delete All\n");
+				clear(List);
+				printList(List);
+				break;
+			case 5:
+				printf("What is index that you want to see : ");
+    				scanf("%d", &index);
+    				get(List, index);
+				printf("\n");
+    				printList(List);
+				break;
+			case 6:
+				printf("If you are curious about what you want, Write string : ");
+				scanf("%s", insertString);
+				contains(List, insertString);
+				break;
+			case 7:
+				printf("What is word what you want to know?? \n");
+				scanf("%s", insertString);
+				indexOf(List, insertString);
+				break;
+			case 8:
+				printf("\n");
+				printf("Size of List : ");
+				size(List);
+				break;
+			case 9:
+				printf("what is the word to be entered? : \n");
+				scanf("%s", insertString);
+				printf("What is number of index what be replaced? \n");
+				scanf("%d", &index);
+				replace(List, index, insertString);
+				printList(List);
+				break;
+			case 0:
+				printf("EXIT\n");
+				break;
+			default:
+				printf("Wrong number. Please write again : ");
+				break;	
+		}
 	}while(caseNum!=0);
-return 0;
+	return 0;
 }
 
 //Init the linkedlist
-linkedList_h* createLinkedList_h(void) 
-{ 
+linkedList_h* createLinkedList_h(void){ 
 	linkedList_h* List; 
 	List = (linkedList_h*)malloc(sizeof(linkedList_h)); 
 	List -> head = NULL; 
 	return List; 
 } 
 //Insert the specified element in order
-void add(linkedList_h* List, char* string) 
-{ 
+void add(linkedList_h* List, char* string){ 
 	listNode* newNode; 
 	listNode* point; 
 	newNode = (listNode*)malloc(sizeof(listNode));
 	strcpy(newNode->data, string);
 	newNode->link= NULL; 
-	if (List->head == NULL){ 
+	if(List->head == NULL){ 
 		List->head = newNode; 
 		return; 
    	} 
    	point = List->head; 
-   	while (point->link != NULL){ 
+   	while(point->link != NULL){ 
 	      	point = point->link; 
    	} 
    	point->link = newNode; 
 }
 //Removes the element at the specified position in this list
-void removeNode(linkedList_h* List, int delnum)
-{
-
+void removeNode(linkedList_h* List, int delnum){
 	int count=0;
         listNode* findNode2 = List->head;
         while(findNode2 != NULL ){
@@ -165,25 +160,22 @@ void removeNode(linkedList_h* List, int delnum)
  
 //Returns the index of the specified element
 int indexOf(linkedList_h* List, char *string){
-
-	int count1=1;
-   
+	int count=1;
 	listNode* findNode = List->head;
 	listNode* newNode;
 	newNode = (listNode*)malloc(sizeof(listNode));
 	strcpy(newNode->data, string);
 
 	while(strcmp(findNode->data ,newNode->data) != 0 ){
-      		count1++;
+      		count++;
       		findNode=findNode->link;
 	}
-	printf("The index number of the inserted string is (%d) \n", count1);
+	printf("The index number of the inserted string is (%d) \n", count);
 	return 0;
 }
 
 //Delete node that received string value
 void removeNode2(linkedList_h* List, char *string){
-	
 	listNode* del;
 	listNode* findNode;
 	for(findNode=List->head; findNode->link!=NULL; findNode=findNode->link){
@@ -223,15 +215,12 @@ int isEmpty(linkedList_h* List){
 
 //Replace the value of the index had
 void replace(linkedList_h* List, int index, char *string){
-
 	removeNode(List, index);
 	insertMNode(List, index, string);
-
 }
 
 //Get value of index
 void get(linkedList_h* List, int index){
-	
 	int count=0;
         listNode* findNode = List->head;
         while(findNode != NULL){
@@ -258,24 +247,18 @@ void get(linkedList_h* List, int index){
 
 //Does this include the value written?
 int contains(linkedList_h* List, char *string){
-	
-        listNode* findNode=List->head;
-
+	listNode* findNode=List->head;
 	for(findNode=List->head; findNode->link!=NULL; findNode=findNode->link){
-        	
-		if(strcmp(findNode->data, string)){
+        	if(strcmp(findNode->data, string)){
 			printf("Included.\n");
 			break;
 		}
-			
 	}
-        
 	return 0;
 }
 
 //Print linkedlist
-void printList(linkedList_h* List) 
-{ 
+void printList(linkedList_h* List){ 
 	listNode* findNode; 
 	printf("List = ("); 
 	findNode= List->head; 
@@ -290,8 +273,7 @@ void printList(linkedList_h* List)
 }
 
 //All delete in linkedlist
-void clear(linkedList_h* List)
-{
+void clear(linkedList_h* List){
 	listNode* point;
 	while(List->head != NULL){
 		point = List->head;
@@ -302,9 +284,7 @@ void clear(linkedList_h* List)
 }
   
 //Insert string type value in middle of linkedlist
-void insertMNode(linkedList_h *List, int num, char *string) 
-{ 
-
+void insertMNode(linkedList_h *List, int num, char *string){ 
 	int count=0;
         listNode* findNode = List->head;
         while(findNode != NULL ){
@@ -328,11 +308,9 @@ void insertMNode(linkedList_h *List, int num, char *string)
 				findNode=findNode->link;
 				count++;
 			}
-
 			listNode* newNode; 
 			newNode = (listNode*)malloc(sizeof(listNode)); 
 			strcpy(newNode->data, string);
- 
 			if (List==NULL){ 
 				List->head = newNode; 
 				newNode -> link = NULL; 
