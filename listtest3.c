@@ -1,12 +1,14 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <string.h> 
-typedef struct ListNode{ 
+typedef struct ListNode
+{ 
 	char data[100]; 
 	struct ListNode* link; 
 }listNode; 
 
-typedef struct{
+typedef struct
+{
 	listNode* head; 
 }linkedList_h; 
 
@@ -25,19 +27,22 @@ int size(linkedList_h* List);
 int isEmpty(linkedList_h* List);
 void replace(linkedList_h* List, int index, char *string);
 
-int main(){ 
+int main()
+{ 
 	char insertString[100];
 	int caseNum, index, delnum;
 
 	linkedList_h* List;
 	List = createLinkedList_h();
-	do{
+	do
+	{
 		printf("\n----------Linkedlist Menu----------\n");
 		printf("\n");
 		printf("1. addNode \n2. insertMNode \n3. removeNode \n4. allClear \n5. get \n6. contains \n7. indexOf \n8. size \n9. replace \n0. exit\n");
 		printf("\nChoose the number which you want : ");
 		scanf("%d", &caseNum);
-		switch(caseNum){
+		switch(caseNum)
+		{
 			case 1:
 				printf("Insert string in the list : ");
 	 			scanf("%s", insertString);
@@ -106,49 +111,62 @@ int main(){
 }
 
 //Init the linkedlist
-linkedList_h* createLinkedList_h(void){ 
+linkedList_h* createLinkedList_h(void)
+{ 
 	linkedList_h* List; 
 	List = (linkedList_h*)malloc(sizeof(linkedList_h)); 
 	List -> head = NULL; 
 	return List; 
 } 
 //Insert the specified element in order
-void add(linkedList_h* List, char* string){ 
+void add(linkedList_h* List, char* string)
+{ 
 	listNode* newNode; 
 	listNode* point; 
 	newNode = (listNode*)malloc(sizeof(listNode));
 	strcpy(newNode->data, string);
 	newNode->link= NULL; 
-	if(List->head == NULL){ 
+	if(List->head == NULL)
+	{ 
 		List->head = newNode; 
 		return; 
    	} 
    	point = List->head; 
-   	while(point->link != NULL){ 
+   	while(point->link != NULL)
+	{ 
 	      	point = point->link; 
    	} 
    	point->link = newNode; 
 }
 //Removes the element at the specified position in this list
-void removeNode(linkedList_h* List, int delnum){
+void removeNode(linkedList_h* List, int delnum)
+{
 	int count=0;
         listNode* findNode2 = List->head;
-        while(findNode2 != NULL ){
+        while(findNode2 != NULL )
+	{
                 findNode2=findNode2->link;
                 count++;
         }
-        if(delnum > count || delnum <= 0){
+        if(delnum > count || delnum <= 0)
+	{
                 printf("The (%d)index does not exist. \n", delnum);
-        }else{
-		if(delnum == 1){
+        }
+	else
+	{
+		if(delnum == 1)
+		{
 			free(List->head);
 			List->head = List->head->link;
           		return;
-        	}else{
+        	}
+		else
+		{
         		listNode* findNode = List->head;
         		listNode* current;
         		int count = 1;
-			for (count = 0 ; count <delnum-2 ; count++){
+			for (count = 0 ; count <delnum-2 ; count++)
+			{
         			findNode = findNode -> link;
         		}
         		current = findNode->link;
@@ -159,14 +177,16 @@ void removeNode(linkedList_h* List, int delnum){
 }
  
 //Returns the index of the specified element
-int indexOf(linkedList_h* List, char *string){
+int indexOf(linkedList_h* List, char *string)
+{
 	int count=1;
 	listNode* findNode = List->head;
 	listNode* newNode;
 	newNode = (listNode*)malloc(sizeof(listNode));
 	strcpy(newNode->data, string);
 
-	while(strcmp(findNode->data ,newNode->data) != 0 ){
+	while(strcmp(findNode->data ,newNode->data) != 0 )
+	{
       		count++;
       		findNode=findNode->link;
 	}
@@ -175,11 +195,14 @@ int indexOf(linkedList_h* List, char *string){
 }
 
 //Delete node that received string value
-void removeNode2(linkedList_h* List, char *string){
+void removeNode2(linkedList_h* List, char *string)
+{
 	listNode* del;
 	listNode* findNode;
-	for(findNode=List->head; findNode->link!=NULL; findNode=findNode->link){
-		if(strcmp(findNode->data, string) == 0){
+	for(findNode=List->head; findNode->link!=NULL; findNode=findNode->link)
+	{
+		if(strcmp(findNode->data, string) == 0)
+		{
 			del = findNode->link;
 			findNode->link=findNode->link->link;
 			free(del);
@@ -189,10 +212,12 @@ void removeNode2(linkedList_h* List, char *string){
 }
 
 //Size of linkedlist
-int size(linkedList_h* List){
+int size(linkedList_h* List)
+{
 	int count=0;
 	listNode* findNode = List->head;
-	while(findNode != NULL ){
+	while(findNode != NULL )
+	{
 		findNode=findNode->link;
 		count++;
 	}
@@ -201,42 +226,56 @@ int size(linkedList_h* List){
 }
 
 //Check whether or not empty
-int isEmpty(linkedList_h* List){
+int isEmpty(linkedList_h* List)
+{
 	int empty=0;
 	listNode* findNode = List->head;
-	if(findNode = NULL){
+	if(findNode = NULL)
+	{
 		empty = 0;
 		printf("The list is empty. Value is (%d) \n", empty);
-	}else{
+	}
+	else
+	{
 		empty = 1;
 		printf("List exists. Value is (%d) \n", empty);
 	}
 }
 
 //Replace the value of the index had
-void replace(linkedList_h* List, int index, char *string){
+void replace(linkedList_h* List, int index, char *string)
+{
 	removeNode(List, index);
 	insertMNode(List, index, string);
 }
 
 //Get value of index
-void get(linkedList_h* List, int index){
+void get(linkedList_h* List, int index)
+{
 	int count=0;
         listNode* findNode = List->head;
-        while(findNode != NULL){
+        while(findNode != NULL)
+	{
                 findNode=findNode->link;
                 count++;
         }
-	if(index > count || index <= 0){
+	if(index > count || index <= 0)
+	{
 		printf("(%d) is not an index in the list\n", index);
-	}else{
-		if(index == 1){
+	}
+	else
+	{
+		if(index == 1)
+		{
 			printf("you entered in the index value is (%s) \n", List->head->data);
-		}else{
+		}
+		else
+		{
 			int count = 1;
 			listNode* findNode;
 			findNode = List->head;
-			while(count != index){
+			while(count != index)
+			{
 				findNode=findNode->link;
 				count++;
    			}
@@ -246,10 +285,13 @@ void get(linkedList_h* List, int index){
 }
 
 //Does this include the value written?
-int contains(linkedList_h* List, char *string){
+int contains(linkedList_h* List, char *string)
+{
 	listNode* findNode=List->head;
-	for(findNode=List->head; findNode->link!=NULL; findNode=findNode->link){
-        	if(strcmp(findNode->data, string)){
+	for(findNode=List->head; findNode->link!=NULL; findNode=findNode->link)
+	{
+        	if(strcmp(findNode->data, string))
+		{
 			printf("Included.\n");
 			break;
 		}
@@ -258,14 +300,17 @@ int contains(linkedList_h* List, char *string){
 }
 
 //Print linkedlist
-void printList(linkedList_h* List){ 
+void printList(linkedList_h* List)
+{ 
 	listNode* findNode; 
 	printf("List = ("); 
 	findNode= List->head; 
-	while(findNode != NULL){ 
+	while(findNode != NULL)
+	{ 
 		printf("%s", findNode->data); 
 		findNode = findNode->link; 
-		if(findNode != NULL){ 
+		if(findNode != NULL)
+		{ 
          		printf(", "); 
 		} 
 	} 
@@ -273,9 +318,11 @@ void printList(linkedList_h* List){
 }
 
 //All delete in linkedlist
-void clear(linkedList_h* List){
+void clear(linkedList_h* List)
+{
 	listNode* point;
-	while(List->head != NULL){
+	while(List->head != NULL)
+	{
 		point = List->head;
 		List->head = List->head->link;	
 		free(point);
@@ -284,37 +331,48 @@ void clear(linkedList_h* List){
 }
   
 //Insert string type value in middle of linkedlist
-void insertMNode(linkedList_h *List, int num, char *string){ 
+void insertMNode(linkedList_h *List, int num, char *string)
+{ 
 	int count=0;
         listNode* findNode = List->head;
-        while(findNode != NULL ){
+        while(findNode != NULL )
+	{
                 findNode=findNode->link;
                 count++;
         }
-        if(num > count || num <= 0){
+        if(num > count || num <= 0)
+	{
                 printf("(%d) is not an index in the list.\n", num);
-        }else{
-		if(num == 1){
+        }
+	else
+	{
+		if(num == 1)
+		{
 			listNode* newNode;
 			newNode = (listNode*)malloc(sizeof(listNode));
 			strcpy(newNode->data, string);
 			newNode->link = List->head;
 			List->head = newNode;
-		}else{
+		}
+		else
+		{
 			int count = 2;
 			listNode* findNode = List->head;
-  
-			while(count != num){
+ 			while(count != num)
+			{
 				findNode=findNode->link;
 				count++;
 			}
 			listNode* newNode; 
 			newNode = (listNode*)malloc(sizeof(listNode)); 
 			strcpy(newNode->data, string);
-			if (List==NULL){ 
+			if(List==NULL)
+			{ 
 				List->head = newNode; 
 				newNode -> link = NULL; 
-			}else{ 
+			}
+			else
+			{ 
 				newNode->link = findNode->link;
 				findNode->link = newNode; 
 			} 
